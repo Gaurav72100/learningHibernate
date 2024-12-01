@@ -9,6 +9,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import Config.JavaBasedConfig;
 import hibernate.entity.Employee;
 
 
@@ -24,7 +25,7 @@ public class Main {
 //		  Session session = sessionfactory.openSession();
 //		  
 		
-		
+		/*
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata data = new MetadataSources(ssr).getMetadataBuilder().build();
 		
@@ -34,5 +35,13 @@ public class Main {
 		  session.persist(emp);
 		  transaction.commit();
 		  System.out.println("Executed successfully");
+		  */
+		
+		SessionFactory sf = JavaBasedConfig.getSessionFactory();
+		Session session = sf.openSession();
+		session.persist(emp);
+		session.beginTransaction().commit();
+		sf.close();
+		System.out.println("Successful");
 	}
 }
