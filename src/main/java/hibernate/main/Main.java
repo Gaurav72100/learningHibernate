@@ -17,7 +17,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Employee emp = new Employee(9,"Mukesh","male",20000);
+		Employee emp = new Employee("Mukesh","male",20000);
 		
 		//Session session = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
 //		Configuration cfg = new Configuration().configure("hibernate.cfg.xml");

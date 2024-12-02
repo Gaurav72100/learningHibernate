@@ -1,13 +1,22 @@
 package hibernate.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity (name="Employees")
 public class Employee {
 
-	private int id,salary;
+	@Id
+	@GeneratedValue (strategy= GenerationType.IDENTITY)//if used generator as identity it will automatically creates id no need to manually give id
+	private int id;
+	private int salary;
 	private String name,gender;
 	
-	public Employee(int id, String name, String gender,int salary) {
+	public Employee( String name, String gender,int salary) {
 		super();
-		this.id = id;
+		//this.id = id;
 		this.salary = salary;
 		this.name = name;
 		this.gender = gender;
