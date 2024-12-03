@@ -5,20 +5,6 @@ public class Employee {
 	private int id,salary;
 	private String name,gender;
 	
-	public Employee( String name, String gender,int salary) {
-		super();
-		//this.id = id;
-		this.salary = salary;
-		this.name = name;
-		this.gender = gender;
-	}
-	
-	
-	public Employee() {
-		super();
-		
-	}
-
 	public int getId() {
 		return id;
 	}
