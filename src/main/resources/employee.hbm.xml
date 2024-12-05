@@ -12,7 +12,9 @@
     
     <class name="hibernate.entity.Employee" >
          <id name="id">
-         <generator class="identity"></generator> 
+         <generator class="increment" >
+			<param name="sequence">emp_seq</param>
+			</generator>
          </id>
  
          <property name="name"/>
