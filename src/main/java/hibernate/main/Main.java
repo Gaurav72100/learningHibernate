@@ -1,5 +1,7 @@
 package hibernate.main;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,29 +12,24 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import hibernate.entity.Employee;
+import jakarta.persistence.TypedQuery;
 
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Employee emp = new Employee("Mukesh","male",20000);
-		
-		//Session session = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
-//		Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-//		   SessionFactory sessionfactory= cfg.buildSessionFactory();
-//		  Session session = sessionfactory.openSession();
-//		  
-		
-		
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata data = new MetadataSources(ssr).getMetadataBuilder().build();
-		
-		SessionFactory sf = data.buildSessionFactory();
+		SessionFactory sf = data.getSessionFactoryBuilder().build();
 		Session session = sf.openSession();
-		  Transaction transaction = session.beginTransaction();
-		  session.persist(emp);
-		  transaction.commit();
-		  System.out.println("Executed successfully");
+		Transaction trans = session.beginTransaction();
+		
+		TypedQuery<Employee> query = session.createNamedQuery("getEmployeeByName" ,Employee.class);
+		query.setParameter("name", "Amit3");
+		List<Employee> list = query.getResultList();
+		System.out.println(list);
+		System.out.println("Successfully");
+		trans.commit();
 	}
 }

@@ -1,38 +1,40 @@
 package hibernate.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+
+
+
+
+@NamedQueries(
+		{
+			@NamedQuery(
+				name="getEmployeeByName",
+				query="from Emp e where e.name=:name"
+				)
+		}
+		     )
+
+
+
+
+
+@Entity(name="Emp")
 public class Employee {
 
-	private int id,salary;
+	@Id
+	private int id;
 	private String name,gender;
 	
-	public Employee( String name, String gender,int salary) {
-		super();
-		//this.id = id;
-		this.salary = salary;
-		this.name = name;
-		this.gender = gender;
-	}
 	
-	
-	public Employee() {
-		super();
-		
-	}
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getSalary() {
-		return salary;
-	}
-
-	public void setSalary(int salary) {
-		this.salary = salary;
 	}
 
 	public String getName() {
@@ -54,7 +56,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", salary=" + salary + ", name=" + name + ", gender=" + gender + "]";
+		return "Employee [id=" + id + ", name=" + name + ", gender=" + gender + "]";
 	}
 
 	
