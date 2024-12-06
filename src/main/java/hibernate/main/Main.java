@@ -9,6 +9,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import hibernate.entity.Address;
 import hibernate.entity.Employee;
 
 
@@ -16,23 +17,28 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Employee emp = new Employee("Mukesh","male",20000);
-		
-		//Session session = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
-//		Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-//		   SessionFactory sessionfactory= cfg.buildSessionFactory();
-//		  Session session = sessionfactory.openSession();
-//		  
-		
-		
-		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-		Metadata data = new MetadataSources(ssr).getMetadataBuilder().build();
-		
-		SessionFactory sf = data.buildSessionFactory();
-		Session session = sf.openSession();
-		  Transaction transaction = session.beginTransaction();
-		  session.persist(emp);
-		  transaction.commit();
-		  System.out.println("Executed successfully");
+	    SessionFactory sf = HibernateUtil.getSessionFactory();
+	    Session s1 = sf.openSession();
+	    
+	   save(s1);
+	   Address em =  s1.get(Address.class, s1);
+	   
+		System.out.println(em);
+
+	}
+	private static void save(Session s1) {
+		Transaction txt = s1.beginTransaction();
+    	
+    	Employee emp = new Employee();
+    	emp.setFirstName("Rahul");
+    	emp.setLastName("Singh");
+    	
+    	Address add = new Address("BudhEnclave","Noida");
+    	emp.setAddress(add);
+    	add.setEmployee(emp);
+    	
+    	s1.persist(emp);
+    	s1.persist(add);
+        txt.commit();
 	}
 }

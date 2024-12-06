@@ -1,61 +1,68 @@
 package hibernate.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="CompanyEmp")
 public class Employee {
 
-	private int id,salary;
-	private String name,gender;
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+private int id;
+
+private String FirstName;
+private String LastName;
+
+@OneToOne
+Address address;
+
+
+void Employee(){}
+ 
+ 
+public int getId() {
+	return id;
+}
+
+public void setId(int id) {
+	this.id = id;
+}
+
+public String getFirstName() {
+	return FirstName;
+}
+
+public void setFirstName(String firstName) {
+	FirstName = firstName;
+}
+
+public String getLastName() {
+	return LastName;
+}
+
+public void setLastName(String lastName) {
+	LastName = lastName;
+}
+
+public Address getAddress() {
+	return address;
+}
+
+public void setAddress(Address address) {
+	this.address = address;
+}
+
 	
-	public Employee( String name, String gender,int salary) {
-		super();
-		//this.id = id;
-		this.salary = salary;
-		this.name = name;
-		this.gender = gender;
-	}
 	
-	
-	public Employee() {
-		super();
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getSalary() {
-		return salary;
-	}
-
-	public void setSalary(int salary) {
-		this.salary = salary;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", salary=" + salary + ", name=" + name + ", gender=" + gender + "]";
-	}
+@Override
+public String toString() {
+	return "Employee [id=" + id + ", FirstName=" + FirstName + ", LastName=" + LastName + ", address=" + address + "]";
+}
 
 	
 	
