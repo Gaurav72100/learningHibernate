@@ -13,9 +13,15 @@ import jakarta.persistence.NamedQuery;
 			@NamedQuery(
 				name="getEmployeeByName",
 				query="from Emp e where e.name=:name"
+				),
+	
+		
+			@NamedQuery(
+				name="findEmployeeById",
+				query="from Emp e where e.id=:id"
 				)
 		}
-		     )
+)
 
 
 
