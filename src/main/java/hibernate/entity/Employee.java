@@ -1,22 +1,48 @@
 package hibernate.entity;
 
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Employee {
 
-	private int id,salary;
-	private String name,gender;
 	
-	public Employee( String name, String gender,int salary) {
-		super();
-		//this.id = id;
-		this.salary = salary;
-		this.name = name;
-		this.gender = gender;
-	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	private String name,gender;
+	private int salary;
+	
+	@OneToMany (mappedBy="employee")
+	List<Address> address;
+	
 	
 	
 	public Employee() {
 		super();
 		
+	}
+
+	public Employee(String name, String gender, int id, List<Address> address) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.id = id;
+		this.address = address;
+	}
+
+	public List<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
 	}
 
 	public int getId() {

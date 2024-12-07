@@ -17,7 +17,8 @@
 	<property name="show_sql">true</property>
 	<property name="format_sql">true</property>
 	
-	<mapping  resource="employee.hbm.xml" />
+	<mapping  class="hibernate.entity.Employee" />
+	<mapping class="hibernate.entity.Address" />
 	
 	</session-factory>
 	</hibernate-configuration>
