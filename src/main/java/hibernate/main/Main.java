@@ -21,9 +21,12 @@ public class Main {
 	    Session s1 = sf.openSession();
 	    
 	   save(s1);
-	   Address em =  s1.get(Address.class, s1);
+	   Employee em =  s1.get(Employee.class, 1);
 	   
 		System.out.println(em);
+		Address ad = s1.get(Address.class, 1);
+		System.out.println(ad);
+		System.out.println(ad.getEmployee());
 
 	}
 	private static void save(Session s1) {
@@ -39,6 +42,8 @@ public class Main {
     	
     	s1.persist(emp);
     	s1.persist(add);
+    	
+    	s1.close();
         txt.commit();
 	}
 }
